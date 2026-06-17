@@ -1,4 +1,5 @@
 import ShapeGrid from "./components/ShapeGrid";
+import TargetCursor from "./components/TargetCursor";
 
 function App() {
   return (
@@ -20,17 +21,40 @@ function App() {
           borderColor="#2F293A"
           hoverFillColor="#222222"
           shape="square"
-          hoverTrailAmount={8}
+          hoverTrailAmount={20}
         />
       </div>
+      {/* CUSTOM CURSOR */}
+      <div
+      style={{
+        position: "relative",
+        zIndex: 2,
+        color: "white",
+        padding: "100px"
+        }}
+      >
+      <TargetCursor
+    spinDuration={2}
+    hideDefaultCursor
+    parallaxOn
+    hoverDuration={0.2}
+      />
 
-      {/* CONTENT */}
-      <div style={{ position: "relative", zIndex: 2, color: "white" }}>
-        <h1 style={{ textAlign: "center", marginTop: "40vh" }}>
-          Kanika Sharma
-        </h1>
-      </div>
-      <h1>heheh</h1>
+    <h1>Kanika Sharma</h1>
+
+    <button className="cursor-target" style={{
+    background: "#090713",
+    color: "#585166",
+    fontSize: "2rem",
+    fontWeight: "80",
+    padding: "20px 25px",
+    border: "3px dashed #393345",
+    borderRadius: "15px",
+    marginTop: "40px",
+    }}>
+    Portfolio
+    </button>
+</div>
 
     </div>
   );
