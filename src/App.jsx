@@ -44,17 +44,18 @@ function App() {
         <div
           style={{
             maxWidth: "1200px",
-            margin: "0 auto",
+            margin: " auto",
             display: "flex",
             flexDirection: "column",
             minHeight: "100vh",
+            paddingTop: "20px",
           }}
         >
           <nav
             style={{
               alignSelf: "center",
               marginTop: "8px",
-              padding: "10px 20px",
+              padding: "10px 10px",
               borderRadius: "999px",
               background: "rgba(10, 14, 22, 0.66)",
               border: "1px solid rgba(255,255,255,0.08)",
@@ -64,7 +65,7 @@ function App() {
               pointerEvents: "auto",
             }}
           >
-            <div style={{ display: "flex", gap: "18px", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ display: "flex", gap: "60px", alignItems: "center", justifyContent: "center" }}>
               {navItems.map((item) => (
                 <a
                   key={item}
@@ -72,9 +73,9 @@ function App() {
                   style={{
                     color: "rgba(226, 232, 240, 0.82)",
                     textDecoration: "none",
-                    fontSize: "0.94rem",
+                    fontSize: "1.1rem",
                     letterSpacing: "0.02em",
-                    padding: "4px 6px",
+                    padding: "10px 6px",
                   }}
                 >
                   {item}
@@ -87,17 +88,18 @@ function App() {
             style={{
               display: "grid",
               gridTemplateColumns: "minmax(0, 1.04fr) minmax(320px, 0.96fr)",
-              gap: "48px",
-              alignItems: "center",
+              gap: "500px",
+              alignItems: "start",
+              paddingTop: "250px",
               flex: 1,
-              paddingTop: "56px",
+              // paddingTop: "-1px",
             }}
           >
-            <section style={{ maxWidth: "620px", pointerEvents: "auto" }}>
+            <section style={{ maxWidth: "400px", pointerEvents: "auto" }}>
               <div
                 style={{
                   color: "rgba(173, 186, 205, 0.88)",
-                  fontSize: "0.92rem",
+                  fontSize: "1.1rem",
                   letterSpacing: "0.22em",
                   textTransform: "uppercase",
                   marginBottom: "14px",
