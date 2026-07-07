@@ -13,3 +13,4 @@ A personal portfolio website built using React and Vite.
 
 - Added interactive ShapeGrid animated background (React Bits) with hover effects and configurable styling.
 - Added Targetcursor
+- Landing Page UI
