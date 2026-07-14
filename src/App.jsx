@@ -1,11 +1,12 @@
 import ShapeGrid from "./components/ShapeGrid";
 import TargetCursor from "./components/TargetCursor";
+import TechStack from "./components/TechStack";
 
 function App() {
   const navItems = ["About", "Projects", "Experience", "Skills", "Contact"];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#000", position: "relative", overflow: "hidden" }}>
+    <div style={{ minHeight: "100vh", background: "#000", position: "relative" }}>
       <div
         style={{
           position: "fixed",
@@ -340,6 +341,8 @@ function App() {
           </main>
         </div>
       </div>
+
+      <TechStack />
     </div>
   );
 }
