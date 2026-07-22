@@ -160,10 +160,10 @@ export function TechStack() {
   return (
     <section 
       id="skills" 
-      className="relative z-10 w-full py-28 md:py-36 bg-transparent text-white font-sans pointer-events-auto"
+      className="relative z-10 w-full pt-12 md:pt-16 pb-28 md:pb-36 bg-transparent text-white font-sans pointer-events-auto"
     >
       {/* Decorative top separator */}
-      <div className="max-w-7xl mx-auto px-8 mb-16">
+      <div className="max-w-7xl mx-auto px-8 mb-10 md:mb-12">
         <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-700/50 to-transparent" />
       </div>
 

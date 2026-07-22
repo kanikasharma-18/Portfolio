@@ -32,9 +32,8 @@ function App() {
           position: "relative",
           zIndex: 2,
           color: "white",
-          padding: "24px 24px 80px",
+          padding: "24px 24px 0px",
           pointerEvents: "none",
-          minHeight: "100vh",
           fontFamily: 'Inter, "SF Pro Display", "Segoe UI", sans-serif',
           display: "block",
           background: "transparent",
@@ -48,7 +47,6 @@ function App() {
             margin: " auto",
             display: "flex",
             flexDirection: "column",
-            minHeight: "100vh",
             paddingTop: "20px",
           }}
         >
@@ -92,8 +90,6 @@ function App() {
               gap: "500px",
               alignItems: "start",
               paddingTop: "250px",
-              flex: 1,
-              // paddingTop: "-1px",
             }}
           >
             <section style={{ maxWidth: "400px", pointerEvents: "auto" }}>
