@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 import { gsap } from 'gsap';
 import './TargetCursor.css';
+
 const getContainingBlock = element => {
   let node = element?.parentElement;
   while (node && node !== document.documentElement) {
@@ -44,6 +45,7 @@ const TargetCursor = ({
   const targetCornerPositionsRef = useRef(null);
   const tickerFnRef = useRef(null);
   const activeStrengthRef = useRef(0);
+  const activeTargetRef = useRef(null);
 
   const isMobile = useMemo(() => {
     if (typeof window === 'undefined') return false;
@@ -66,11 +68,24 @@ const TargetCursor = ({
   const moveCursor = useCallback((x, y) => {
     if (!cursorRef.current) return;
     const { x: offsetX, y: offsetY } = getContainingBlockOffset(containingBlockRef.current);
+    
+    let targetX = x;
+    let targetY = y;
+
+    // Apply smooth magnetic attraction towards hovered target center
+    if (activeTargetRef.current) {
+      const rect = activeTargetRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      targetX = x + (centerX - x) * 0.28;
+      targetY = y + (centerY - y) * 0.28;
+    }
+
     gsap.to(cursorRef.current, {
-      x: x - offsetX,
-      y: y - offsetY,
-      duration: 0.1,
-      ease: 'power3.out'
+      x: targetX - offsetX,
+      y: targetY - offsetY,
+      duration: 0.08,
+      ease: 'power2.out'
     });
   }, []);
 
@@ -88,7 +103,6 @@ const TargetCursor = ({
     containingBlockRef.current = getContainingBlock(cursor);
     const getOffset = () => getContainingBlockOffset(containingBlockRef.current);
 
-    let activeTarget = null;
     let currentLeaveHandler = null;
     let resumeTimeout = null;
 
@@ -119,9 +133,24 @@ const TargetCursor = ({
     createSpinTimeline();
 
     const tickerFn = () => {
-      if (!targetCornerPositionsRef.current || !cursorRef.current || !cornersRef.current) {
+      if (!cursorRef.current || !cornersRef.current) {
         return;
       }
+
+      if (activeTargetRef.current) {
+        const rect = activeTargetRef.current.getBoundingClientRect();
+        const { borderWidth, cornerSize } = constants;
+        const { x: offsetX, y: offsetY } = getOffset();
+
+        targetCornerPositionsRef.current = [
+          { x: rect.left - borderWidth - offsetX, y: rect.top - borderWidth - offsetY },
+          { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.top - borderWidth - offsetY },
+          { x: rect.right + borderWidth - cornerSize - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY },
+          { x: rect.left - borderWidth - offsetX, y: rect.bottom + borderWidth - cornerSize - offsetY }
+        ];
+      }
+
+      if (!targetCornerPositionsRef.current) return;
 
       const strength = activeStrengthRef.current;
       if (strength === 0) return;
@@ -158,14 +187,14 @@ const TargetCursor = ({
     window.addEventListener('mousemove', moveHandler);
 
     const scrollHandler = () => {
-      if (!activeTarget || !cursorRef.current) return;
+      if (!activeTargetRef.current || !cursorRef.current) return;
       const { x: offsetX, y: offsetY } = getOffset();
       const mouseX = gsap.getProperty(cursorRef.current, 'x') + offsetX;
       const mouseY = gsap.getProperty(cursorRef.current, 'y') + offsetY;
       const elementUnderMouse = document.elementFromPoint(mouseX, mouseY);
       const isStillOverTarget =
         elementUnderMouse &&
-        (elementUnderMouse === activeTarget || elementUnderMouse.closest(targetSelector) === activeTarget);
+        (elementUnderMouse === activeTargetRef.current || elementUnderMouse.closest(targetSelector) === activeTargetRef.current);
       if (!isStillOverTarget) {
         if (currentLeaveHandler) {
           currentLeaveHandler();
@@ -201,16 +230,18 @@ const TargetCursor = ({
       }
       const target = allTargets[0] || null;
       if (!target || !cursorRef.current || !cornersRef.current) return;
-      if (activeTarget === target) return;
-      if (activeTarget) {
-        cleanupTarget(activeTarget);
+      if (activeTargetRef.current === target) return;
+      if (activeTargetRef.current) {
+        cleanupTarget(activeTargetRef.current);
       }
       if (resumeTimeout) {
         clearTimeout(resumeTimeout);
         resumeTimeout = null;
       }
 
-      activeTarget = target;
+      activeTargetRef.current = target;
+      cursorRef.current.classList.add('is-active');
+
       const corners = Array.from(cornersRef.current);
       corners.forEach(corner => gsap.killTweensOf(corner));
 
@@ -255,7 +286,15 @@ const TargetCursor = ({
         isActiveRef.current = false;
         targetCornerPositionsRef.current = null;
         gsap.set(activeStrengthRef, { current: 0, overwrite: true });
-        activeTarget = null;
+        
+        if (activeTargetRef.current) {
+          cleanupTarget(activeTargetRef.current);
+          activeTargetRef.current = null;
+        }
+
+        if (cursorRef.current) {
+          cursorRef.current.classList.remove('is-active');
+        }
 
         if (cornersRef.current) {
           const corners = Array.from(cornersRef.current);
@@ -283,7 +322,7 @@ const TargetCursor = ({
         }
 
         resumeTimeout = setTimeout(() => {
-          if (!activeTarget && cursorRef.current && spinTl.current) {
+          if (!activeTargetRef.current && cursorRef.current && spinTl.current) {
             const currentRotation = gsap.getProperty(cursorRef.current, 'rotation');
             const normalizedRotation = currentRotation % 360;
             spinTl.current.kill();
@@ -301,8 +340,6 @@ const TargetCursor = ({
           }
           resumeTimeout = null;
         }, 50);
-
-        cleanupTarget(target);
       };
 
       currentLeaveHandler = leaveHandler;
@@ -328,8 +365,9 @@ const TargetCursor = ({
       window.removeEventListener('mousedown', mouseDownHandler);
       window.removeEventListener('mouseup', mouseUpHandler);
 
-      if (activeTarget) {
-        cleanupTarget(activeTarget);
+      if (activeTargetRef.current) {
+        cleanupTarget(activeTargetRef.current);
+        activeTargetRef.current = null;
       }
 
       spinTl.current?.kill();

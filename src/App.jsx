@@ -1,12 +1,13 @@
 import ShapeGrid from "./components/ShapeGrid";
 import TargetCursor from "./components/TargetCursor";
 import TechStack from "./components/TechStack";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const navItems = ["About", "Projects", "Experience", "Skills", "Contact"];
-
   return (
     <div style={{ minHeight: "100vh", background: "#000", position: "relative" }}>
+      <Navbar />
+
       <div
         style={{
           position: "fixed",
@@ -28,6 +29,7 @@ function App() {
       </div>
 
       <div
+        id="about"
         style={{
           position: "relative",
           zIndex: 2,
@@ -50,39 +52,6 @@ function App() {
             paddingTop: "20px",
           }}
         >
-          <nav
-            style={{
-              alignSelf: "center",
-              marginTop: "8px",
-              padding: "10px 10px",
-              borderRadius: "999px",
-              background: "rgba(10, 14, 22, 0.66)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 10px 35px rgba(0, 0, 0, 0.22)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              pointerEvents: "auto",
-            }}
-          >
-            <div style={{ display: "flex", gap: "60px", alignItems: "center", justifyContent: "center" }}>
-              {navItems.map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  style={{
-                    color: "rgba(226, 232, 240, 0.82)",
-                    textDecoration: "none",
-                    fontSize: "1.1rem",
-                    letterSpacing: "0.02em",
-                    padding: "10px 6px",
-                  }}
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </nav>
-
           <main
             style={{
               display: "grid",
@@ -157,6 +126,12 @@ function App() {
               <button
                 type="button"
                 className="cursor-target"
+                onClick={() => {
+                  const element = document.getElementById("projects");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
                 style={{
                   background: "rgba(124, 173, 255, 0.14)",
                   color: "#eaf3ff",
@@ -338,7 +313,12 @@ function App() {
         </div>
       </div>
 
+      <div id="projects" style={{ paddingTop: "60px" }} />
+      <div id="experience" style={{ paddingTop: "40px" }} />
+
       <TechStack />
+
+      <div id="contact" style={{ paddingBottom: "80px" }} />
     </div>
   );
 }
