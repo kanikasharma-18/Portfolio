@@ -1,5 +1,6 @@
 import ShapeGrid from "./components/ShapeGrid";
 import TargetCursor from "./components/TargetCursor";
+import Projects from "./components/Projects";
 import TechStack from "./components/TechStack";
 import Navbar from "./components/Navbar";
 
@@ -313,8 +314,9 @@ function App() {
         </div>
       </div>
 
-      <div id="projects" style={{ paddingTop: "60px" }} />
-      <div id="experience" style={{ paddingTop: "40px" }} />
+      <Projects />
+
+      <div id="experience" style={{ paddingTop: "20px" }} />
 
       <TechStack />
 
