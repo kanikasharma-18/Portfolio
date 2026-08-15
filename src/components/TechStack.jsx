@@ -160,7 +160,7 @@ export function TechStack() {
   return (
     <section 
       id="skills" 
-      className="relative z-10 w-full pt-12 md:pt-16 pb-28 md:pb-36 bg-transparent text-white font-sans pointer-events-auto"
+      className="relative z-10 w-full pt-12 md:pt-16 pb-28 md:pb-36 bg-transparent text-white font-sans pointer-events-none"
     >
       {/* Decorative top separator */}
       <div className="max-w-7xl mx-auto px-8 mb-10 md:mb-12">
@@ -233,7 +233,7 @@ export function TechStack() {
                 variants={itemVariants}
                 whileHover={{ y: -6 }}
                 transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
-                className="group relative flex flex-col justify-between p-6 md:p-8 rounded-2xl bg-zinc-950/20 border border-white/5 hover:border-slate-800/80 transition-all duration-300 overflow-hidden"
+                className="group relative flex flex-col justify-between p-6 md:p-8 rounded-2xl bg-zinc-950/20 border border-white/5 hover:border-slate-800/80 transition-all duration-300 overflow-hidden pointer-events-auto"
               >
                 {/* Micro-glow background gradient effect */}
                 <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-500/0 via-transparent to-cyan-500/0 group-hover:from-blue-500/[0.02] group-hover:to-cyan-500/[0.02] transition-all duration-500 pointer-events-none" />
