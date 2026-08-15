@@ -91,10 +91,10 @@ export function Projects() {
               variants={itemVariants}
               whileHover={{ y: -6 }}
               transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
-              className="group relative flex flex-col justify-between p-5 md:p-6 rounded-2xl bg-zinc-950/40 border border-white/10 hover:border-cyan-500/30 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_35px_rgba(56,189,248,0.12)] transition-all duration-500 overflow-hidden pointer-events-auto"
+              className="group relative flex flex-col justify-between p-6 md:p-8 rounded-2xl bg-zinc-950/20 border border-white/5 hover:border-slate-800/80 hover:bg-[#1a1723]/60 transition-all duration-300 overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.5)] pointer-events-auto"
             >
               {/* Subtle ambient card background glow */}
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-cyan-500/0 via-transparent to-blue-500/0 group-hover:from-cyan-500/[0.03] group-hover:to-blue-500/[0.03] transition-all duration-500 pointer-events-none" />
+              <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-500/0 via-transparent to-cyan-500/0 group-hover:from-blue-500/[0.02] group-hover:to-cyan-500/[0.02] transition-all duration-500 pointer-events-none" />
 
               <div className="relative z-10 flex flex-col h-full justify-between">
                 <div>
@@ -105,13 +105,13 @@ export function Projects() {
 
                   {/* Card Content Header */}
                   <div className="mb-3">
-                    <h3 className="text-xl font-bold text-slate-100 group-hover:text-cyan-300 transition-colors duration-300 tracking-tight">
+                    <h3 className="text-lg font-semibold text-slate-200 group-hover:text-white transition-colors duration-300 tracking-tight">
                       {project.title}
                     </h3>
                   </div>
 
                   {/* Description */}
-                  <p className="text-slate-300 text-sm leading-relaxed mb-6 font-normal">
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6 font-normal group-hover:text-slate-300 transition-colors duration-300">
                     {project.description}
                   </p>
                 </div>
