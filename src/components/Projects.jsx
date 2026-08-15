@@ -41,7 +41,7 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="relative z-10 w-full pt-16 md:pt-24 pb-20 md:pb-28 bg-transparent text-white font-sans pointer-events-auto select-none"
+      className="relative z-10 w-full pt-16 md:pt-24 pb-20 md:pb-28 bg-transparent text-white font-sans pointer-events-none select-none"
     >
       {/* Top Decorative Line Separator matching TechStack */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 mb-12 md:mb-16">
@@ -91,7 +91,7 @@ export function Projects() {
               variants={itemVariants}
               whileHover={{ y: -6 }}
               transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
-              className="group relative flex flex-col justify-between p-5 md:p-6 rounded-2xl bg-zinc-950/40 border border-white/10 hover:border-cyan-500/30 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_35px_rgba(56,189,248,0.12)] transition-all duration-500 overflow-hidden"
+              className="group relative flex flex-col justify-between p-5 md:p-6 rounded-2xl bg-zinc-950/40 border border-white/10 hover:border-cyan-500/30 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_35px_rgba(56,189,248,0.12)] transition-all duration-500 overflow-hidden pointer-events-auto"
             >
               {/* Subtle ambient card background glow */}
               <div className="absolute inset-0 z-0 bg-gradient-to-b from-cyan-500/0 via-transparent to-blue-500/0 group-hover:from-cyan-500/[0.03] group-hover:to-blue-500/[0.03] transition-all duration-500 pointer-events-none" />
