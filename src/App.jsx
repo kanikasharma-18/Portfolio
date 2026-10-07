@@ -3,6 +3,7 @@ import TargetCursor from "./components/TargetCursor";
 import Projects from "./components/Projects";
 import TechStack from "./components/TechStack";
 import Navbar from "./components/Navbar";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           inset: 0,
           zIndex: 0,
           background: "#000",
-          pointerEvents: "auto",
+          pointerEvents: "none",
         }}
       >
         <ShapeGrid
@@ -56,8 +57,8 @@ function App() {
           <main
             style={{
               display: "grid",
-              gridTemplateColumns: "minmax(0, 1.04fr) minmax(320px, 0.96fr)",
-              gap: "500px",
+              gridTemplateColumns: "minmax(0, 1.04fr) minmax(0, 0.96fr)",
+              gap: "clamp(32px, 8vw, 96px)",
               alignItems: "start",
               paddingTop: "250px",
             }}
@@ -157,6 +158,7 @@ function App() {
                   width: "420px",
                   height: "420px",
                   maxWidth: "100%",
+                  overflow: "hidden",
                 }}
               >
                 <div
@@ -320,7 +322,7 @@ function App() {
 
       <TechStack />
 
-      <div id="contact" style={{ paddingBottom: "80px" }} />
+      <Contact />
     </div>
   );
 }
