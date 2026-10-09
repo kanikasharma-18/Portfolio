@@ -22,7 +22,10 @@ const ShapeGrid = ({
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+
     const ctx = canvas.getContext('2d');
+    if (!ctx) return undefined;
 
     const isHex = shape === 'hexagon';
     const isTri = shape === 'triangle';
@@ -37,6 +40,8 @@ const ShapeGrid = ({
     };
 
     window.addEventListener('resize', resizeCanvas);
+    const resizeObserver = new ResizeObserver(resizeCanvas);
+    resizeObserver.observe(canvas);
     resizeCanvas();
 
     const drawHex = (cx, cy, size) => {
@@ -375,6 +380,7 @@ const ShapeGrid = ({
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      resizeObserver.disconnect();
       cancelAnimationFrame(requestRef.current);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
