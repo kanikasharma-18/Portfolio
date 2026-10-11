@@ -74,3 +74,9 @@
   border-right: none;
   border-top: none;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .target-cursor-wrapper {
+    display: none;
+  }
+}
