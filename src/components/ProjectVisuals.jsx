@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaNetworkWired, FaCheckCircle, FaExchangeAlt, FaTerminal, FaPlay, FaPause, FaBrain, FaChartLine, FaLock } from 'react-icons/fa';
+import { FaNetworkWired, FaCheckCircle, FaExchangeAlt, FaTerminal, FaBrain, FaChartLine, FaLock } from 'react-icons/fa';
 
 export function PeerMeshVisual() {
   const [packetPos, setPacketPos] = useState(0);
@@ -82,7 +82,7 @@ export function PeerMeshVisual() {
 }
 
 export function AlgoScopeVisual() {
-  const [bars, setBars] = useState([35, 65, 25, 85, 45, 95, 55, 75, 40, 90]);
+  const [bars] = useState([35, 65, 25, 85, 45, 95, 55, 75, 40, 90]);
   const [activeIdx, setActiveIdx] = useState(2);
 
   useEffect(() => {
