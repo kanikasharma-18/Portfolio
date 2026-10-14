@@ -1,4 +1,4 @@
-import { FaReact, FaGithub, FaExternalLinkAlt, FaNetworkWired, FaBrain, FaChartBar, FaExchangeAlt, FaMicrochip } from 'react-icons/fa';
+import { FaReact, FaNetworkWired, FaBrain, FaExchangeAlt } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiTypescript } from 'react-icons/si';
 
 export const PROJECTS_DATA = [
